@@ -1,0 +1,299 @@
+@BackgroundColor: #ddd;
+@NaviBarHeight: 50px;
+@NaviBarUpperColor: #B0C4DE;
+@NaviBarLowerColor: #778899;
+@NaviItemPadding: 20px;
+@NaviItemColorDelta: #202020;
+@NaviDropDownColor: @NaviBarLowerColor;
+
+.gradient(@startColor, @endColor) {
+    background: linear-gradient(@startColor, @endColor);
+    background: -webkit-linear-gradient(@startColor, @endColor);
+    background: -moz-linear-gradient(@startColor, @endColor);
+}
+
+.rounded(@radius: 5px) {
+    border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+}
+
+.bottomRounded(@radius: 5px) {
+    border-bottom-left-radius: @radius;
+    border-bottom-right-radius: @radius;
+    -webkit-border-bottom-left-radius: @radius;
+    -webkit-border-bottom-right-radius: @radius;
+    -moz-border-bottom-left-radius: @radius;
+    -moz-border-bottom-right-radius: @radius;
+}
+
+.borderBox {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;    
+    box-sizing: border-box;
+}
+
+.transition(@duration: 0.3s) {
+    -webkit-transition:all linear @duration;
+    transition:all linear @duration;
+}
+
+.hide {
+    display: none;
+    .transition;
+}
+
+.unselectable {
+    -webkit-user-select: none;    
+    -moz-user-select: none;
+}
+
+ul.hl {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+    >li {
+        display: inline-block;
+        list-style: none;
+        height: 100%;
+        line-height: 100%;
+        vertical-align: middle;
+    }
+}
+
+ul.vl {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    >li {
+        display: list-item;
+        list-style: none;
+    }
+}
+
+html {
+    height: 100%;
+
+    body {
+        margin: 0;
+        background-color: @BackgroundColor;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+.navi-bar {
+    width: 100%;
+    height: @NaviBarHeight;
+    position: fixed;
+    z-index: 100;
+    .gradient(@NaviBarUpperColor, @NaviBarLowerColor);
+
+    .logo {
+        padding: 5px 5px 5px 10px;
+        line-height: @NaviBarHeight;
+        font-family: Arial;
+        font-size: 24px;
+        color: #fff;
+    }
+
+    .place-holder {
+        width: 60px;
+    }
+
+    .search-bar {
+        width: 300px;
+        height: @NaviBarHeight - 10px;
+        margin: 5px 5px 5px 5px;
+        padding-left: 5px;
+        .rounded;
+        .transition;
+        background-color: #ccc;
+        box-shadow: inset 1px 2px #999;
+
+        input {
+            width: 300px;
+            height: 100%;
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            color: #333;
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
+
+    .search-bar-focus {
+        background-color: #eee;
+        .transition;
+    }
+
+    .navi-menu {
+        a {
+            padding: 0 @NaviItemPadding 0 @NaviItemPadding;
+            line-height: @NaviBarHeight;
+            height: @NaviBarHeight;
+            color: #eee;
+            display: table-cell;
+
+            &:hover {
+                .gradient(@NaviBarUpperColor - @NaviItemColorDelta, @NaviBarLowerColor - @NaviItemColorDelta);
+            }
+        }
+
+        .menu-button-hover {
+            .gradient(@NaviBarUpperColor - @NaviItemColorDelta, @NaviBarLowerColor - @NaviItemColorDelta);
+        }
+    }
+
+    .drop-down-menu {
+        width: 200px;
+        height: 400px;
+        position: relative;
+        opacity: 0.8;
+        background-color: @NaviDropDownColor;
+        .bottomRounded(8px);
+    }
+}
+
+.main-content {
+    width: 800px;
+    background-color: #fff;
+    left: 10%;
+    top: @NaviBarHeight + 15px;
+    position: absolute;
+    padding: 10px 10px 10px 10px;
+}
+
+.candidate-word {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px inset #aaa;
+
+    li {
+        line-height: 30px;
+    }
+
+    input {
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .word-info {
+        padding-bottom: 20px;
+        margin-bottom: 5px;
+
+        input.word {
+            width: 100px;
+            font-size: 24px;
+            font-weight: bold;
+
+            &:disabled {
+                border: none;
+                color: #000;
+            }
+        }
+
+        input.kana {
+            width: 100px;
+            color: #666;
+            font-size: 20px;
+
+            &:disabled {
+                border: none;
+            color: #666;
+            }
+        }
+    }
+
+    .word-types {
+        border: 1px solid #ccc;
+        height: 34px;
+        position: relative;
+
+        .word-type {
+            margin: 0 5px 0 5px;
+            padding: 0 10px 0 10px;
+            line-height: 24px;
+            height: 24px;
+            font-size: 14px;
+            background-color: #B0C4DE + #101010;
+            .borderBox;
+            .unselectable;
+
+            a {
+                color: #444;
+                text-decoration: none;
+            }
+
+            .delete-btn {
+                padding: 1px 3px 1px 3px;
+                margin-left: 5px;
+                .rounded(3px);
+                color: #666;
+                &:hover {
+                    color: #222;
+                }
+            }
+
+            &:hover {
+                background-color: #B0C4DE;
+            }
+        }
+
+        .word-type.ng-leave {
+            opacity: 1;
+            .transition();
+        }
+
+        .word-type.ng-leave.ng-leave-active {
+            opacity: 0;
+        }
+
+        .add-word-type {
+            width: 100px;
+            text-align: center;
+            height: 36px;
+            line-height: 36px;
+            display: table-cell;
+            color: #444;
+            font-size: 26px;
+        }
+
+        .drop-down-menu {
+            width: 100px;
+            position: absolute;
+            background-color: #778899;
+            z-index: 100;
+
+            li {
+                text-align: center;
+                a {
+                    width: 100%;
+                    color: #ddd;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    .meanings.ng-leave {
+        opacity: 1;
+        .transition();
+    }
+
+    .meanings.ng-leave.ng-leave-active {
+        opacity: 0;
+    }
+}

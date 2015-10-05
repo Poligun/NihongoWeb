@@ -1,0 +1,21 @@
+<div class="nav-bar">
+    <ul class="hl">
+        <li><icon name="menu" classes="menu-btn" ng-click="showSideBar = true"></icon></li>
+        <li><span class="title">Nihongo</span></li>
+        <li>
+            <div class="search-bar" ng-class="{focus: searchFocused}">
+                <div class="progress" progress="searchProgress"></div>
+                <ul class="hl">
+                    <li><icon name="search" ng-click="searchWord(searchInput)"></icon></li>
+                    <li><input type="text"
+                        ng-model="searchInput"
+                        ng-enter="searchWord(searchInput)"
+                        ng-disabled="searchLock"
+                        ng-focus="searchFocused = true"
+                        ng-blur="searchFocused = false">
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>

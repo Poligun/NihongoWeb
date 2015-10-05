@@ -1,0 +1,7 @@
+<div class="grey-filter" ng-hide="!showSideBar" ng-click="showSideBar = false"></div>
+<div class="side-bar" slide-in-out="showSideBar">
+    <ul class="vl">
+        <li>{{user.name}}</li>
+        <li><span ng-click="signOut()">Sign Out</span></li>
+    </ul>
+</div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="nihongo">
+<head>
+
+    <link href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    {% load staticfiles %}
+    <link rel="stylesheet/less" type="text/css" href="{% static 'nihongo/less/nihongo.less' %}">
+    <script type="text/javascript">
+        less = {
+            env: 'development',
+            async: 'true'
+        }
+    </script>
+
+    <script type="text/javascript" src="{% static 'nihongo/vendor/less.js'    %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/vendor/jquery.js'  %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/vendor/angular.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/vendor/angular-route.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/vendor/angular-animate.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/aes.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/extension.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/services.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/route.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/directives.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/nihongo-controller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/navi-bar-controller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/side-bar-controller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/dialogs-controller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/sign-in-controller.js' %}"></script>
+    <script type="text/javascript" src="{% static 'nihongo/script/word-list-controller.js' %}"></script>
+</head>
+<body ng-controller="NihongoController">
+<input id="templateUrl" type="hidden" value="{% static 'nihongo/templates/' %}">
+{% verbatim %}
+<sidebar></sidebar>
+<navibar></navibar>
+<dialogs></dialogs>
+<div class="main-area" ng-view></div>
+{% endverbatim %}
+</body>
+</html>

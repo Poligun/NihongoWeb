@@ -1,0 +1,30 @@
+<div class="grey-filter dialog-filter"></div>
+<div class="dialog">
+    <ul class="vl">
+        <li class="title">Please sign in</li>
+        <li class="content">
+            <div class="sign-in">
+                <ul class="vl">
+                    <li>
+                        <ul class="hl">
+                            <li class="field">Email</li>
+                            <li><input type="email" name="email" ng-model="signInForm.email"></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="hl">
+                            <li class="field">Password</li>
+                            <li><input type="password" name="password" ng-model="signInForm.password" ng-enter="signIn()"></li>
+                        </ul>
+                    </li>
+                </ul>
+                <span class="hint-text" ng-class="signInForm.status">{{signInForm.message}}</span>
+            </div>
+        </li>
+        <li class="actions">
+            <ul class="hl">
+                <li><span ng-click="signIn()">Sign In</span></li>
+            </ul>
+        </li>
+    </ul>
+</div>

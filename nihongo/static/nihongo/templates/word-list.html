@@ -1,0 +1,35 @@
+<ul class="vl">
+    <li ng-repeat="word in words">
+        <div class="word-card">
+            <div class="info" ng-class="{'hide-detail': folded, 'not-indict': !word.indict}">
+                <ul class="vl">
+                    <li>
+                        <span class="word">{{word.word}}</span>
+                        <icon classes="expand-btn" name="expand_less" ng-show="!folded" ng-click="folded = true"></icon>
+                        <icon classes="expand-btn" name="expand_more" ng-show="folded" ng-click="folded = false"></icon>
+                    </li>
+                    <li><span class="kana">{{word.kana}}</span></li>
+                    <li><span class="word-types">{{word.wordTypes.join('， ')}}</span></li>
+                </ul>
+            </div>
+            <ul class="vl meaning-list" slide-up-down="!folded">
+                <li ng-repeat="meaning in word.meanings">
+                <ul class="hl">
+                    <li>{{$index + 1}}、</li>
+                    <li>{{meaning.meaning}}</li>
+                    <li ng-if="meaning.explanation != ''">（{{meaning.explanation}}）</li>
+                </ul>
+                <ul class="vl example-list">
+                    <li ng-repeat="example in meaning.examples">
+                        <ul class="vl example">
+                            <li><example example="example"></example></li>
+                            <li><span class="translation">{{example.translation}}</span></li>
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+            <icon name="add" classes="fab md-24" ng-click="addWord(word)" ng-show="!word.indict"></icon>
+        </div>
+    </li>
+</ul>

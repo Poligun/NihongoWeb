@@ -1,0 +1,14 @@
+<div>
+    <div class="grey-filter dialog-filter" ng-show="dialogs.length > 0"></div>
+    <div class="dialog" ng-repeat="dialog in dialogs">
+        <ul class="vl">
+            <li class="title">{{dialog.title}}</li>
+            <li class="content">{{dialog.content}}</li>
+            <li class="actions">
+                <ul class="hl">
+                    <li ng-repeat="action in dialog.actions"><span ng-click="onActionClicked($parent.$index, $index, action)">{{action}}</span></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

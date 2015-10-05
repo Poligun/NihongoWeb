@@ -1,0 +1,488 @@
+@dp: 1px;
+@grid: 8 * @dp;
+
+@Red500: #F44336;
+@Green500: ##4CAF50;
+@Indigo500: #3F51B5;
+@Indigo400: #5C6BC0;
+@Indigo300: #7986CB;
+@OrangeA700: #FF6D00;
+@OrangeA400: #FF9100;
+@DeepOrangeA400: #FF3D00;
+@Green700: #388E3C;
+
+@PrimaryColor: @Indigo500;
+@PrimaryLightColor: @Indigo400;
+@PrimaryHintColor: @Indigo300;
+@AccentColor: @OrangeA700;
+@AccentLightcolor: @OrangeA400;
+@SecondAccentColor: @Green700;
+
+
+@PrimaryTextColorOnLight: #ffffff * (1 - 0.87);
+@PrimaryTextColorOnDark: #ffffff * 1;
+@SecondaryTextColorOnLight: #ffffff * (1 - 0.54);
+@SecondaryTextColorOnDark: #ffffff * 0.7;
+@HintTextColorOnLight: #ffffff * (1 - 0.26);
+@HintTextColorOnDark: #ffffff * 0.3;
+
+@HeadlineFontSize: 24 * @dp;
+@TitleFontSize: 21 * @dp;
+
+.ElevationShadow(@elevation: 1) {
+    & when (@elevation = 1) {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+    & when (@elevation = 2) {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+    & when (@elevation = 3) {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+    & when (@elevation = 4) {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+    & when (@elevation = 5) {
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    }
+}
+
+.Transition(@duration: 0.3s, @timing: linear) {
+    -webkit-transition:all @timing @duration;
+    transition:all @timing @duration;
+}
+
+.BorderBoxing {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;    
+    box-sizing: border-box;
+}
+
+.Rounded(@radius: 5 * @dp) {
+    border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+}
+
+.RoundedTopSide(@radius: 5 * @dp) {
+    border-top-left-radius: 2 * @dp;
+    border-top-right-radius: 2 * @dp;
+    -webkit-border-top-left-radius: 2 * @dp;
+    -webkit-border-top-right-radius: 2 * @dp;
+    -moz-border-top-left-radius: 2 * @dp;
+    -moz-border-top-right-radius: 2 * @dp;
+}
+
+.RoundedBottomSide(@radius: 5 * @dp) {
+    border-bottom-left-radius: 2 * @dp;
+    border-bottom-right-radius: 2 * @dp;
+    -webkit-border-bottom-left-radius: 2 * @dp;
+    -webkit-border-bottom-right-radius: 2 * @dp;
+    -moz-border-bottom-left-radius: 2 * @dp;
+    -moz-border-bottom-right-radius: 2 * @dp;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24 * @dp;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// Rules for sizing the icon.
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+// Rules for using icons as black on a light background.
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// Rules for using icons as white on a dark background.
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #eee;
+}
+
+.hide {
+    display: none;
+}
+
+ul.hl {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+    >li {
+        display: inline-block;
+        list-style: none;
+        height: 100%;
+        line-height: 100%;
+        vertical-align: middle;
+    }
+}
+
+ul.vl {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    >li {
+        display: list-item;
+        list-style: none;
+    }
+}
+
+@FABSize: 6 * @grid;
+@FABScalingRatio: 1.1;
+.fab {
+    z-index: 2;
+    width: @FABSize;
+    height: @FABSize;
+    position: absolute;
+    background-color: @AccentColor;
+    .Rounded(@FABSize / 2);
+    .ElevationShadow(2);
+    border: none;
+    
+    &:hover {
+        width: @FABSize * @FABScalingRatio;
+        height: @FABSize * @FABScalingRatio;
+        .Rounded(@FABSize * @FABScalingRatio);
+        .ElevationShadow(3);
+    }
+}
+
+.card {
+    .Rounded(2 * @dp);
+    .ElevationShadow(1);
+}
+
+@NaviBarHeight: 8 * @grid;
+.nav-bar {
+    z-index: 100;
+    width: 100%;
+    height: @NaviBarHeight;
+    position: fixed;
+    background-color: @PrimaryColor;
+    .ElevationShadow(2);
+
+    >ul>li {
+        margin-left: 3 * @grid;
+    }
+
+    .menu-btn {
+        line-height: @NaviBarHeight;
+        cursor: pointer;
+        &:hover {
+            color: @AccentColor;
+        }
+    }
+
+    .title {
+        color: @PrimaryTextColorOnDark;
+        font-size: @HeadlineFontSize;
+        line-height: @NaviBarHeight;
+    }
+
+    @SearchBarWidth: 60 * @grid;
+    @SearchBarHeight: 6 * @grid;
+    @SearchBarMarginTop: (@NaviBarHeight - @SearchBarHeight) / 2;
+
+    .search-bar {
+        width: @SearchBarWidth;
+        height: @SearchBarHeight;
+        padding-left: 1 * @grid;
+        position: relative;
+        margin-top: @SearchBarMarginTop;
+        transition: all 0.2s ease-in-out;
+        background-color: @PrimaryLightColor;
+        .Rounded();
+
+        &:hover {
+            background-color: @PrimaryHintColor;
+        }
+
+        .progress {
+            width: 0%;
+            height: 4 * @dp;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: @AccentColor;
+            border-bottom-left-radius: 2 * @dp;
+        }
+
+        .progress.complete {
+            width: 100%;
+            border-bottom-right-radius: 2 * @dp;
+        }
+
+        .material-icons {
+            line-height: @SearchBarHeight;
+            height: @SearchBarHeight;
+            cursor: pointer;
+            color: @PrimaryTextColorOnDark;
+        }
+
+        input[type = 'text'] {
+            width: @SearchBarWidth - 32 * @dp;
+            height: @SearchBarHeight;
+            font-size: @TitleFontSize;
+            background: none;
+            color: @SecondaryTextColorOnDark;
+            outline: none;
+            border: none;
+            .BorderBoxing;
+        }
+    }
+
+    .search-bar.focus {
+        background-color: #fff;
+        .material-icons {
+            color: @AccentColor;
+        }
+        input[type = 'text'] {
+            color: @SecondaryTextColorOnLight;
+        }
+    }
+}
+
+.grey-filter {
+    z-index: 101;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #000;
+    opacity: 0.5;
+}
+
+@SideBarWidth: 30 * @grid;
+.side-bar {
+    z-index: 102;
+    position: fixed;
+    width: @SideBarWidth;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    .ElevationShadow(4);
+}
+
+.dialog-filter {
+    z-index: 103;
+}
+
+.dialog {
+    z-index: 104;
+    position: fixed;
+    width: 30%;
+    left: 50%;
+    top: 30%;
+    margin: 0 0 0 -15%;
+    background-color: #fff;
+    .ElevationShadow(5);
+    padding: 3 * @grid;
+    padding-bottom: 0;
+    .Transition;
+
+    ul {
+
+        z-index: 105;
+    }
+
+    .title {
+        font-size: @TitleFontSize;
+        font-weight: 600;
+        color: @PrimaryTextColorOnLight;
+    }
+    .content {
+        margin-top: 3 * @grid;
+        margin-bottom: 3 * @grid;
+        font-size: 14 * @dp;
+        color: @SecondaryTextColorOnLight;
+    }
+    .actions {
+        float: right;
+        height: 48 * @dp;
+        span {
+            font-size: 14 * @dp;
+            color: @AccentColor;
+            line-height: 36 * @dp;
+            padding-left: 2 * @grid;
+            cursor: pointer;
+            &:hover {
+                color: @AccentLightcolor;
+            }
+        }
+    }
+}
+
+.dialog.ng-leave-active {
+    opacity: 0;
+    .Transition;
+}
+
+.sign-in {
+    line-height: 6 * @grid;
+    input {
+        .BorderBoxing;
+        width: 32 * @grid;
+        height: 4 * @grid;
+        padding-left: 1 * @grid;
+        float: right;
+        font-size: 14 * @dp;
+    }
+    .field {
+        width: 12 * @grid;
+    }
+    .hint-text {
+        line-height: 4 * @grid;
+        color: @AccentColor;
+        position: absolute;
+    }
+    .hint-text.error {
+        color: @Red500;
+    }
+    .hint-text.success {
+        color: @Green500;
+    }
+}
+
+.context-menu {
+    width: 20 * @grid;
+    height: 40 * @grid;
+    border: 1px solid #aaa;
+    background-color: #fff;
+    position: fixed;
+    left: 20%;
+    top: 20%;
+    .menu-item {
+        line-height: 3 * @grid;
+        text-align: center;
+    }
+}
+
+.main-area {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: @NaviBarHeight;
+    padding-left: 14 * @grid;
+    padding-top: 10 * @grid;
+}
+
+@WordCardWidth: 70 * @grid;
+.word-card {
+    .card;
+    margin-bottom: 4 * @grid;
+    width: @WordCardWidth;
+    background-color: #fff;
+    position: relative;
+
+    .fab {
+        z-index: 2;
+        top: 13 * @grid;
+        right: -(@FABSize / 2);
+        line-height: @FABSize;
+        text-align: center;
+        color: @PrimaryTextColorOnDark;
+        cursor: pointer;
+        &:hover {
+            font-size: 24 * @dp * @FABScalingRatio;
+            top: 13 * @grid - (@FABScalingRatio - 1) / 2 * @FABSize;
+            right: -(@FABSize / 2) - (@FABScalingRatio - 1) / 2 * @FABSize;
+        }
+    }
+
+    .info.not-indict {
+        background-color: @PrimaryLightColor;
+    }
+
+    .info {
+        .RoundedTopSide(2 * @dp);
+        padding: 2 * @grid;
+        background-color: @PrimaryColor;
+
+        .expand-btn {
+            float: right;
+            cursor: pointer;
+            color: @PrimaryTextColorOnDark;
+            &:hover {
+                color: @AccentColor;
+            }
+        }
+
+        span.word {
+            font-size: @HeadlineFontSize;
+            line-height: 36 * @dp;
+            color: @PrimaryTextColorOnDark;
+        }
+
+        span.kana {
+            font-size: @TitleFontSize;
+            line-height: 36 * @dp;
+            color: @PrimaryTextColorOnDark;
+        }
+
+        span.word-types {
+            font-size: 16 * @dp;
+            color: @SecondaryTextColorOnDark;
+        }
+    }
+
+    .info.hide-detail {
+        .RoundedBottomSide(2 * @dp);
+    }
+
+    .meaning-list {
+        overflow: hidden;
+        width: 100%;
+        padding: 2 * @grid;
+        padding-top: 0;
+        font-size: 16 * @dp;
+        word-wrap: break-word;
+        .BorderBoxing;
+
+        >li {
+            margin-top: 16 * @dp;
+        }
+        .example-list {
+            margin-left: 32 * @dp;
+            font-size: 13 * @dp;
+            line-height: 24 * @dp;
+            width: inherit;
+            .BorderBoxing;
+
+            .example {
+                padding-top: @grid;
+            }
+
+            .occurence {
+                color: @SecondAccentColor;
+            }
+
+            .translation {
+                color: @SecondaryTextColorOnLight;
+            }
+        }
+    }
+
+}
