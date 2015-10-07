@@ -5,11 +5,23 @@ import random
 
 pickWord = lambda: random.choice(Word.objects.all())
 
-def test():
-    word = Word.objects.filter(word = '打ち合わせ')[0]
+def startTest():
+    #word = Word.objects.filter(word = '打ち合わせ')[0]
     word = pickWord()
     print('{} - {}'.format(word.word, word.kana))
     print(makeChoices(word.word, word.kana))
+
+def pickSimilarKana(kana):
+    row, col = getRowAndCol(kana)
+    while True:
+        newCol = weightedSample(range(5), lambda c: 5 - abs(min(col - c, col + 5 - c)), 1)[0]
+        newKana = Hiraganas[row * 5 + newCol]
+        if row in [1, 2, 3, 4, 5, 6, 8, 9 ,10]:
+            # TO-DO: 增加選擇清濁的功能
+            pass
+        if newKana in 'ゃゅょっんを':
+            continue
+        return newKana
 
 def makeChoices(word, kana, numberOfChoices = 5):
     word = katakanaToHiragana(word)
@@ -18,6 +30,7 @@ def makeChoices(word, kana, numberOfChoices = 5):
     while len(choices) < numberOfChoices:
         choice = ''
         lcsCopy = lcs
+        # TO-DO: 首先確定選項中變化的假名個數以及比例
         for i in range(len(kana)):
             if kana[i] in 'ゃゅょっんを':
                 choice += kana[i]
@@ -26,23 +39,12 @@ def makeChoices(word, kana, numberOfChoices = 5):
                 lcsCopy = lcsCopy[1:]
                 choice += kana[i]
                 continue
-            rol, col = getRowAndCol(kana[i])
-            if rol == 0:
-                choice += kana[i]
-                continue
-            while True:
-                k = random.choice(Hiraganas)
-                if k in 'ゃゅょっんを':
-                    continue
-                dist = getDist(kana[i], k)
-                if dist == 0 or dist > 5:
-                    continue
-                if len(choice) > 0 and k == choice[-1]:
-                    continue
-                choice += k
-                break
-        if choice not in choices:
+            # TO-DO: 針對促音及拗音部分檢查合法性
+            choice += pickSimilarKana(kana[i])
+        if choice != kana and choice not in choices:
             choices.append(choice)
+    choices.append(kana)
+    random.shuffle(choices)
     return choices
 
 def generateKanaQuestion(word):
